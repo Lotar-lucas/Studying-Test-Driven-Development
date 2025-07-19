@@ -16,6 +16,7 @@ export class Property {
     if (maxGuests <= 0) {
       throw new Error("O número máximo de hóspedes deve ser maior que zero");
     }
+
     this.id = id;
     this.name = name;
     this.description = description;

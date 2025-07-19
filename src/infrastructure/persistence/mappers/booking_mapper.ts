@@ -25,6 +25,34 @@ export class BookingMapper {
   }
 
   static toPersistence(domain: Booking): BookingEntity {
+
+    if (!domain.getId()) {
+      throw new Error("O ID é obrigatório");
+    }
+
+    if (!domain.getProperty()) {
+      throw new Error("A propriedade é obrigatória");
+    }
+    if (!domain.getGuest()) {
+      throw new Error("O hóspede é obrigatório");
+    }
+
+    if (!domain.getDateRange()) {
+      throw new Error("O período de reserva é obrigatório");
+    }
+
+    if (domain.getGuestCount() < 1) {
+      throw new Error("O número de hóspedes deve ser maior que zero");
+    }
+
+    if (domain.getTotalPrice() <= 0) {
+      throw new Error("O preço total deve ser maior que zero");
+    }
+
+    if (!domain.getStatus()) {
+      throw new Error("O status da reserva é obrigatório");
+    }
+
     const entity = new BookingEntity();
     entity.id = domain.getId();
     entity.property = PropertyMapper.toPersistence(domain.getProperty());
